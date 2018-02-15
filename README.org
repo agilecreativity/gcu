@@ -1,0 +1,37 @@
+*** gcu
+
+Run =git pull= on all projects from a given directory using Lumo/ClojureScript.
+
+*** Basic Usages
+**** Pre-requisites
+***** [[https://github.com/anmonteiro/lumo][Lumo]]
+***** [[https://github.com/clojure/clojurescript][ClojureScript]]
+***** [[https://nodejs.org/en/][nodejs]]
+***** [[https://www.npmjs.com/get-npm][npm]]
+
+**** Basic Installation
+
+#+BEGIN_SRC sh
+# Install the basic guide
+npm install
+
+# Then you can call the project using
+./bin/gcu /path/to/your-base-directory
+
+# Or install it globally with
+npm install -g
+
+# This will allow you to run something like
+gcu ~/path/to/your-base-directory
+#+END_SRC
+
+*** Sample Session
+
+#+ATTR_HTML: :style margin-left: auto; margin-right: auto;
+[[gcu-sample-session.gif]]
+
+*** Licenses
+
+Copyright © 2018 Burin Choomnuan
+
+Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.

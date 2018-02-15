@@ -1,0 +1,11 @@
+/resources/public/js/compiled/**
+/classes/
+/out/
+/target/
+/resources/
+.lein-deps-sum
+.lein-repl-history
+.lein-plugins/
+.repl
+.nrepl-port
+.lumo_cache

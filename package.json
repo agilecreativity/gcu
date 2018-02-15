@@ -1,0 +1,35 @@
+{
+    "name": "gcu",
+    "version": "0.1.5",
+    "description": "Run git pull on all projects from a given base directory.",
+    "main": "bin/gcu",
+    "directories": {
+        "lib": "lib"
+    },
+    "bin": {
+        "gcu": "bin/gcu"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Burin Choomnuan",
+    "license": "EPL-1.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/agilecreativity/gcu.git"
+    },
+    "bugs": {
+        "url": "https://github.com/agilecreativity/gcu/issues"
+    },
+    "homepage": "https://github.com/agilecreativity/gcu#README.org",
+    "dependencies": {
+        "glob": "7.1.2",
+        "lumo": "^0.20.11",
+        "lumo-cljs": "1.6.0",
+        "simple-git": "^1.75.0",
+        "yargs": "^10.0.3"
+    },
+    "devDependencies": {
+        "shelljs": "^0.7.8"
+    }
+}
