@@ -12,14 +12,8 @@ Run =git pull= on all projects from a given directory using Lumo/ClojureScript.
 **** Basic Installation
 
 #+BEGIN_SRC sh
-# Install the basic guide
-npm install
-
-# Then you can call the project using
-./bin/gcu /path/to/your-base-directory
-
-# Or install it globally with
-npm install -g
+# Install the library from npm
+npm install -g gcu
 
 # This will allow you to run something like
 gcu ~/path/to/your-base-directory
