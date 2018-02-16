@@ -6,21 +6,6 @@ LUMO_BIN=$(which lumo)
 # Path to the called executable
 EXECUTABLE_PATH="${BASH_SOURCE[0]}"
 
-if [[ $EXECUTABLE_PATH == \/* ]]; # If executable path starts with a slash.
-then
-  # Its installed npm instance is being called
-  BASE=${NODE_MODULES}/gcu
-  NODE_MODULES=`npm root -g`
-  LIB=${BASE}/lib
-  SRC=${BASE}/src
-else
-  # Its being called from within its repo during development
-  BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
-  NODE_MODULES=${BASE}/node_modules
-  LIB=${BASE}/lib
-  SRC=src
-fi
-
 if test -L "$LUMO_BIN"
 then
   LUMO_BIN=$(dirname $(readlink -f "$LUMO_BIN"))/lumo
@@ -30,4 +15,4 @@ export GCU_SOURCES_PATH=$(dirname $(dirname $(realpath "$0")))
 
 # NODE_PATH seems to be missing when running as global binary
 export NODE_PATH="$GCU_SOURCES_PATH/node_modules:$GCU_SOURCES_PATH/..:$NODE_PATH"
-exec "$LUMO_BIN" --classpath "$GCU_SOURCES_PATH/src:$LIB/andare-0.8.0.jar" --cache "$HOME/.lumo_cache" -m gcu.core $@
+exec "$LUMO_BIN" --classpath "$GCU_SOURCES_PATH/src:$GCU_SOURCES_PATH/lib/andare-0.8.0.jar" --cache "$HOME/.lumo_cache" -m gcu.core $@

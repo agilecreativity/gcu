@@ -1,6 +1,6 @@
 {
     "name": "gcu",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "description": "Run git pull on all projects from a given base directory.",
     "main": "bin/gcu",
     "directories": {
@@ -23,7 +23,7 @@
     },
     "homepage": "https://github.com/agilecreativity/gcu#README.org",
     "dependencies": {
-        "glob": "7.1.2",
+        "glob": "^7.1.2",
         "lumo": "^0.20.11",
         "lumo-cljs": "1.6.0",
         "simple-git": "^1.75.0",
