@@ -8,6 +8,12 @@ Run =git pull= on all projects from a given directory using Lumo/ClojureScript.
 ***** [[https://github.com/clojure/clojurescript][ClojureScript]]
 ***** [[https://nodejs.org/en/][nodejs]]
 ***** [[https://www.npmjs.com/get-npm][npm]]
+***** GNU coreutils package
+****** For OSX, you can install it with [[https://brew.sh/][HomeBrew]]
+
+ #+BEGIN_SRC sh
+ brew install coreutils
+ #+END_SRC
 
 **** Basic Installation
 
