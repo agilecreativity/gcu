@@ -15,4 +15,4 @@ export GCU_SOURCES_PATH=$(dirname $(dirname $(realpath "$0")))
 
 # NODE_PATH seems to be missing when running as global binary
 export NODE_PATH="$GCU_SOURCES_PATH/node_modules:$GCU_SOURCES_PATH/..:$NODE_PATH"
-exec "$LUMO_BIN" --classpath "$GCU_SOURCES_PATH/src:$GCU_SOURCES_PATH/lib/andare-0.8.0.jar" --cache "$HOME/.lumo_cache" -m gcu.core $@
+exec "$LUMO_BIN" --classpath "$GCU_SOURCES_PATH/src:$GCU_SOURCES_PATH/lib/andare.jar" --cache "$HOME/.lumo_cache" -m gcu.core $@

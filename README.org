@@ -1,5 +1,8 @@
 *** gcu
 
+[[https://clojars.org/gcu][https://img.shields.io/clojars/v/gcu.svg]]
+[[https://jarkeeper.com/agilecreativity/gcu][https://jarkeeper.com/agilecreativity/gcu/status.svg]]
+
 Run =git pull= on all projects from a given directory using Lumo/ClojureScript.
 
 *** Basic Usages
