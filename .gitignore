@@ -1,9 +1,11 @@
 *jar
+*.class
 /lib/
 /classes/
 /out/
 /target/
 .lein-deps-sum
+.lein-failures
 .lein-repl-history
 .lein-plugins/
 .repl
@@ -11,3 +13,4 @@
 node_modules
 .lumo_cache
 pom.xml
+pom.xml.asc

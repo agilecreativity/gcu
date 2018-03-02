@@ -1,6 +1,6 @@
 {
     "name": "gcu",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "description": "Run git pull on all projects from a given base directory.",
     "main": "bin/gcu",
     "directories": {
@@ -26,6 +26,7 @@
         "glob": "^7.1.2",
         "lumo": "^0.20.11",
         "lumo-cljs": "1.6.0",
+        "npm": "^5.7.1",
         "simple-git": "^1.75.0",
         "yargs": "^10.0.3"
     },
