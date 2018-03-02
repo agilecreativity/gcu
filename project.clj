@@ -1,4 +1,4 @@
-(defproject gcu "0.1.8"
+(defproject gcu "0.1.9"
   :description "Run git pull for all projects from a given directory using Lumo/ClojureScript"
   :license {:name "The MIT License"
             :url "https://opensource.org/licenses/MIT"}

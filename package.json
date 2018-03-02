@@ -1,6 +1,6 @@
 {
     "name": "gcu",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "description": "Run git pull on all projects from a given base directory.",
     "main": "bin/gcu",
     "directories": {
