@@ -2,6 +2,7 @@
 
 [[https://clojars.org/gcu][https://img.shields.io/clojars/v/gcu.svg]]
 [[https://jarkeeper.com/agilecreativity/gcu][https://jarkeeper.com/agilecreativity/gcu/status.svg]]
+[[https://badge.fury.io/js/gcu][https://badge.fury.io/js/gcu.svg]]
 
 Run =git pull= on all projects from a given directory using Lumo/ClojureScript.
 
@@ -14,13 +15,18 @@ Run =git pull= on all projects from a given directory using Lumo/ClojureScript.
 ***** GNU coreutils package
 ****** For OSX, you can install it with [[https://brew.sh/][HomeBrew]]
 
- #+BEGIN_SRC sh
- brew install coreutils
- #+END_SRC
+#+BEGIN_SRC sh
+brew install lumo
+
+brew install coreutils
+#+END_SRC
 
 **** Basic Installation
 
 #+BEGIN_SRC sh
+# Install Lumo via NPM (if not already)
+npm install -g lumo-cljs
+
 # Install the library from npm
 npm install -g gcu
 
