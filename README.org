@@ -32,6 +32,9 @@ npm install -g gcu
 
 # This will allow you to run something like
 gcu ~/path/to/your-base-directory
+
+# To allow verbose mode try
+gcu ~/projects/clojure-src verbose true
 #+END_SRC
 
 *** Sample Session

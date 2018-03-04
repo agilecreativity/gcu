@@ -14,6 +14,8 @@
 
 (def git-pull-chan (async/chan))
 
+(def verbose-mode (atom false))
+
 (defn- file-exists?
   [f]
   (fs.existsSync f))
@@ -78,7 +80,6 @@
 
 (defn- git-pull
   [git-instance chan git-dir]
-  (println "git pull : " git-dir)
   (.pull git-instance
          (fn [err, result]
            (if-not err
@@ -121,10 +122,12 @@
     (git-status git-instance git-status-chan)
     (let [result (async/<! git-status-chan)]
       (when (clean-status? result)
-        (println "git pull " current-dir)
+        (if @verbose-mode
+            (println "git pull " current-dir))
         (git-pull git-instance git-pull-chan current-dir)
 
-        (println "run git pull " current-dir)
+        (if @verbose-mode
+            (println "run git pull " current-dir))
         (run-git-pull git-pull-chan current-dir)))))
 
 ;; Public API
@@ -135,12 +138,18 @@
     (doall
      (for [current-dir dir-list]
        (async-macros/go
-         (println "Process directory : " (expand-path base-dir current-dir))
+         (if @verbose-mode (println "Process directory : " (expand-path base-dir current-dir)))
          (let [git-dir (expand-path base-dir current-dir)
                git-inst (simple-git-instance git-dir)]
            (git-pull-all git-inst git-dir)))))))
 
 (defn -main [& args]
   (if-not (empty? args)
-    (git-catch-up (first args))
+    (let [[base-dir & opts] args
+          options (clojure.walk/keywordize-keys (apply hash-map opts))
+          {:keys [verbose] :or {:verbose "false"}} options]
+      (if (= verbose "true")
+        (reset! verbose-mode true)
+        (reset! verbose-mode false))
+      (git-catch-up base-dir))
     (println "Need to specify the base directory.")))
