@@ -1,18 +1,17 @@
 (ns gcu.core
-  (:require [cljs.core.async :as async])
-  (:require-macros [cljs.core.async.macros :as async-macros]))
+  (:require [cljs.core.async :as a]
+            [clojure.walk :refer [keywordize-keys]])
+  (:require-macros [cljs.core.async.macros :refer [go]]))
 
 (def ^:no-doc fs (js/require "fs"))
 
 (def ^:no-doc path (js/require "path"))
 
-(def ^:no-doc glob (.-sync (js/require "glob")))
-
 (def ^:no-doc simple-git (js/require "simple-git"))
 
-(def git-status-chan (async/chan))
+(def git-status-chan (a/chan))
 
-(def git-pull-chan (async/chan))
+(def git-pull-chan (a/chan))
 
 (def verbose-mode (atom false))
 
@@ -66,11 +65,6 @@
   [base-dir]
   (filter #(git-repo? (expand-path base-dir %)) (files base-dir)))
 
-(defn- keywordize-keys
-  "Keywordize keys to symbol for easy usage"
-  [result]
-  (js->clj result :keywordize-keys true))
-
 (defn- simple-git-instance
   "Initialize git instance for code re-use."
   ([]
@@ -83,7 +77,7 @@
   (.pull git-instance
          (fn [err, result]
            (if-not err
-             (async-macros/go (async/>! chan result))
+             (go (a/>! chan result))
              ;; Note: we like to know which repo, we have the problem
              (println "git pull error : " git-dir)))))
 
@@ -92,13 +86,12 @@
   (.status git-instance
            (fn [err, result]
              (if-not err
-               (async-macros/go (async/>! chan result))))))
+               (go (a/>! chan result))))))
 
 (defn- all-changed-files
   "List all files in the git status as workaround to .-modified is not working!"
   [result]
-  (clj->js (map #(% "path")
-                (js->clj (.. result -files)))))
+  (clj->js (map #(% "path") (js->clj (.. result -files)))))
 
 (defn- clean-status?
   "Return true if the git status is clean and ready for git pull."
@@ -108,8 +101,8 @@
 (defn- run-git-pull
   "Handle git pull command."
   [chan base-dir]
-  (async-macros/go
-    (let [result (async/<! chan)
+  (go
+    (let [result (a/<! chan)
           updated-files (keywordize-keys (.-files result))]
       (when-not (empty? updated-files)
         (println "Changed summary : " base-dir (keywordize-keys (.. result -summary)))
@@ -118,16 +111,14 @@
 (defn- git-pull-all
   "Run git pull on all projects from a given base directory."
   [git-instance current-dir]
-  (async-macros/go
+  (go
     (git-status git-instance git-status-chan)
-    (let [result (async/<! git-status-chan)]
+    (let [result (a/<! git-status-chan)]
       (when (clean-status? result)
-        (if @verbose-mode
-            (println "git pull " current-dir))
+        (if @verbose-mode (println "git pull " current-dir))
         (git-pull git-instance git-pull-chan current-dir)
 
-        (if @verbose-mode
-            (println "run git pull " current-dir))
+        (if @verbose-mode (println "run git pull " current-dir))
         (run-git-pull git-pull-chan current-dir)))))
 
 ;; Public API
@@ -137,7 +128,7 @@
   (let [dir-list (git-projects (expand-tilde base-dir))]
     (doall
      (for [current-dir dir-list]
-       (async-macros/go
+       (go
          (if @verbose-mode (println "Process directory : " (expand-path base-dir current-dir)))
          (let [git-dir (expand-path base-dir current-dir)
                git-inst (simple-git-instance git-dir)]
@@ -146,7 +137,7 @@
 (defn -main [& args]
   (if-not (empty? args)
     (let [[base-dir & opts] args
-          options (clojure.walk/keywordize-keys (apply hash-map opts))
+          options (keywordize-keys (apply hash-map opts))
           {:keys [verbose] :or {:verbose "false"}} options]
       (if (= verbose "true")
         (reset! verbose-mode true)
