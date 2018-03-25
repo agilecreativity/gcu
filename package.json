@@ -1,9 +1,9 @@
 {
     "name": "gcu",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "Run git pull on all projects from a given base directory.",
     "main": "bin/gcu",
-    "readme": "README.md",
+    "readme": "README.org",
     "directories": {
         "lib": "lib"
     },
