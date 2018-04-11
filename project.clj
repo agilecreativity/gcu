@@ -5,5 +5,6 @@
   :dependencies [[org.clojure/clojurescript "1.10.238"]
                  [org.clojure/tools.cli "0.3.5"]
                  [andare "0.9.0"]]
-  :deploy-repositories [["releases"  {:sign-releases false :url "https://clojars.org/repo"}]
-                        ["snapshots" {:sign-releases false :url "https://clojars.org/repo"}]])
+  ;;:deploy-repositories [["releases"  {:sign-releases false :url "https://clojars.org/repo"}]
+  ;;                      ["snapshots" {:sign-releases false :url "https://clojars.org/repo"}]]
+  )
